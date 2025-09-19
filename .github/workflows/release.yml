@@ -34,7 +34,6 @@ jobs:
       packages: write
       actions: write
 
-
     steps:
       - uses: actions/checkout@v5
       - name: Prepare release
@@ -59,7 +58,7 @@ jobs:
       - name: Back to dev
         run: |
           echo "Back to development"
-          make release version=${{ github.event.inputs.version }}
+          make back_to_dev version=${{ github.event.inputs.version }}
 
       - name: Commit back to development changes
         uses: stefanzweifel/git-auto-commit-action@v4
