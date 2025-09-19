@@ -17,10 +17,18 @@ jobs:
     name: Run other workflows
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Test CI workflow
+      - name: Trigger Linting workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
             workflow: 'Linting'
+            repo: ${{ github.repository }}
+            ref: 'master'
+            token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger Docs workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+            workflow: 'Documentation'
             repo: ${{ github.repository }}
             ref: 'master'
             token: ${{ secrets.GITHUB_TOKEN }}
