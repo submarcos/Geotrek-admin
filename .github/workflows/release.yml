@@ -52,16 +52,19 @@ jobs:
             # Defaults to "Apply automatic changes"
             commit_message: "Prepare release ${{ github.event.inputs.version }}"
             tagging_message: ${{ github.event.inputs.version }}
-#       - name: Tag, push and create associated new release with auto generated notes
-#         run: |
-#           git tag ${{ github.event.inputs.version }}
-#           git push origin HEAD --tags
-#           gh release create ${{ github.event.inputs.version }} --title "Release ${{ github.event.inputs.version }}"
-#         #  env:
-#         #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#
-#       #- name: Make release
-      #  uses: ncipollo/release-action@v1
-      #  with:
-      #    tag: ${{ github.event.inputs.version }}
-      #    name: Release ${{ github.event.inputs.version }}
+
+      - name: Create GitHub Release
+        run : |
+          gh release create ${{ github.event.inputs.version }} --generate-notes
+
+     - name: Back to dev
+        run: |
+          echo "Back to development"
+          make release version=${{ github.event.inputs.version }}
+
+      - name: Commit back to development changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+            # Optional. Commit message for the created commit.
+            # Defaults to "Apply automatic changes"
+            commit_message: "Back to development"
