@@ -57,7 +57,7 @@ jobs:
         run : |
           gh release create ${{ github.event.inputs.version }} --generate-notes
 
-     - name: Back to dev
+      - name: Back to dev
         run: |
           echo "Back to development"
           make release version=${{ github.event.inputs.version }}
