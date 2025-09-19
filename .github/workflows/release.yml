@@ -31,7 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: write
       actions: write
+
 
     steps:
       - uses: actions/checkout@v5
@@ -52,7 +54,7 @@ jobs:
         run : |
           gh release create ${{ github.event.inputs.version }} --generate-notes
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Back to dev
         run: |
