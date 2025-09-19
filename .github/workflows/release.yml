@@ -54,7 +54,7 @@ jobs:
         run : |
           gh release create ${{ github.event.inputs.version }} --generate-notes
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
 
       - name: Back to dev
         run: |
