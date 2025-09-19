@@ -30,9 +30,8 @@ jobs:
     needs: [run_other_workflows]
     runs-on: ubuntu-latest
     permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
       contents: write
+      actions: write
 
     steps:
       - uses: actions/checkout@v5
@@ -54,14 +53,6 @@ jobs:
           gh release create ${{ github.event.inputs.version }} --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Trigger Test CI workflow
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: 'Test CI'
-          repo: ${{ github.repository }}
-          ref: ${{ github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Back to dev
         run: |
