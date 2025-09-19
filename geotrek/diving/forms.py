@@ -1,8 +1,8 @@
 from crispy_forms.layout import Div
 
+from geotrek.common.forms import CommonForm
 
 from .models import Dive
-from geotrek.common.forms import CommonForm
 
 
 class DiveForm(CommonForm):
